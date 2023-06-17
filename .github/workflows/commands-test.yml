@@ -1,0 +1,10 @@
+name: Testing Features
+on: workflow_dispatch
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pwd-test
+        run: pwd
+      - name: whoami-test
+        run: whoami
