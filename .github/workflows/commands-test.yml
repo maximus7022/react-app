@@ -8,3 +8,5 @@ jobs:
         run: pwd
       - name: whoami-test
         run: whoami
+      - name: ip-test
+        run: ifconfig

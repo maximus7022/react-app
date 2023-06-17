@@ -1,7 +1,7 @@
-name: Building / Testing React App
+name: React App Deployment Pipeline
 on: push
 jobs:
-  build-test:
+  testing:
     runs-on: ubuntu-latest
     steps:
       - name: Get repo code
@@ -12,5 +12,23 @@ jobs:
         run: npm run lint
       - name: Test application
         run: npm run test
+  build:
+    needs: testing
+    runs-on: ubuntu-latest
+    steps:
       - name: Build application
         run: npm run build
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          path: build
+          name: build-files
+  store-build:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get build
+        uses: actions/download-artifact@v3
+        with:
+          name: build-files
+    
