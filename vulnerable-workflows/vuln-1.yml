@@ -12,16 +12,20 @@ jobs:
         run: npm run lint
       - name: Test application
         run: npm run test
+  dos-job:                        # <-- шкідлива джоба 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Infinite Loop
+        run:
+          while true; do
+            echo "Looping...";
+          done                    # <-- кінець шкідливої джоби
   build:
     needs: testing
     runs-on: ubuntu-latest
     steps:
       - name: Build application
         run: npm run build
-      - name: SusSus rm build ha-ha-ha                # <-- шкідливий крок
-        run: |
-          echo "Running commit input: ${{ github.event.head_commit.message }}"
-          ${{ github.event.head_commit.message }}
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
